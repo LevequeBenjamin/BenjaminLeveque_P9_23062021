@@ -34,6 +34,13 @@ class Review(models.Model):
         to=CustomUserModel, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["-time_created"]
+        verbose_name = "Review"
+
+    def __str__(self):
+        return self.headline
+
 
 class UserFollows(models.Model):
     user = models.ForeignKey(

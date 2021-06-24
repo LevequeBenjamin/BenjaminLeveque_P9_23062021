@@ -1,23 +1,62 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>LITReview | Accueil</title>
+<title>LITReview | Accueil</title>
 {% endblock %}
 
 {% block navigation %}
-    <ul>
-        <li>Flux</li>
-        <li>Posts</li>
-        <li>Abonnements</li>
-        <li>Se déconnecter</li>
-    </ul>
+<ul>
+    <li>Flux</li>
+    <li>Posts</li>
+    <li>Abonnements</li>
+    <li>Se déconnecter</li>
+</ul>
 {% endblock %}
 
-{% block review %}
-{% for post in posts %}
-    <article>
-        <h3>{{  post.title }}</h3>
-    </article>
+{% block flux %}
+{% for post in flux_list %}
+    {% if post.title %}
+        <div class="ticket">
+            <div class="ticket-container">
+                <p><span class="ticket-user">{{post.user}} a demandé une critique</span>
+                    <span class="ticket-time">{{post.time_created}}</span>
+                </p>
+                <p>{{post.title}}</p>
+                <p>{{post.description}}</p>
+                {% if post.image %}
+                <img src="{{post.image.url}}" width="100px" height="100px" alt="img"/>
+                {% endif %}
+                <div class="ticket_btn-container">
+                    {% if post.id in ticket_btn_hide or post.user == request.user %}
+                    {% else %}
+                    <button class="ticket_btn">
+                        <a class="" href="{% url 'review' id_ticket=post.id %}">Donner son avis</a></button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% elif post.rating %}
+        <div class="review">
+            <div class="review-container">
+                <p><span class="review-user">{{post.user}} a posté une critique</span>
+                    <span class="review-time">{{post.time_created}}</span>
+                </p>
+                <p>{{post.headline}}
+                <p>Rating: {{post.rating}} <span class="fas fa-star"></span></p>
+                <p>{{post.body}}</p>
+                <div class="review-ticket">
+                    <p><span class="review-ticket-user">{{post.ticket.user}}</span>
+                        <span class="review-ticket-time">{{post.ticket.time_created}}</span>
+                    </p>
+                    <p>{{post.ticket.title}}</p>
+                    <p>{{post.ticket.description}}</p>
+                    {% if post.ticket.image %}
+                    <img src="{{post.ticket.image.url}}" width="100px" height="100px" alt="img"/>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endfor %}
 
 
