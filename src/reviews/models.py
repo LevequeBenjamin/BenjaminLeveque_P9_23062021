@@ -4,15 +4,14 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 # settings.AUTH_USER_MODEL
-CustomUser = get_user_model()
+CustomUserModel = get_user_model()
 
 
 class Ticket(models.Model):
-    title = models.CharField(max_length=128, unique=True, verbose_name="Titre")
-    slug = models.SlugField(max_length=128, unique=True, blank=True)
+    title = models.CharField(max_length=128, verbose_name="Titre")
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(
-        to=CustomUser, on_delete=models.CASCADE)
+        to=CustomUserModel, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     time_created = models.DateTimeField(auto_now=True)
 
@@ -23,12 +22,6 @@ class Ticket(models.Model):
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-
-        super().save(*args, **kwargs)
-
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
@@ -38,16 +31,16 @@ class Review(models.Model):
     headline = models.CharField(max_length=128)
     body = models.CharField(max_length=8192, blank=True)
     user = models.ForeignKey(
-        to=CustomUser, on_delete=models.CASCADE)
+        to=CustomUserModel, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now=True)
 
 
 class UserFollows(models.Model):
     user = models.ForeignKey(
-        to=CustomUser, on_delete=models.CASCADE, related_name="following"
+        to=CustomUserModel, on_delete=models.CASCADE, related_name="following"
     )
     followed_user = models.ForeignKey(
-        to=CustomUser, on_delete=models.CASCADE, related_name="followed_by"
+        to=CustomUserModel, on_delete=models.CASCADE, related_name="followed_by"
     )
 
     class Meta:

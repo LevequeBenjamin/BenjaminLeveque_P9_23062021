@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{% static 'assets/img/litreview-icon.png' %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- FONTAWESOME -->
+        <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        />
+        <!-- TITLE -->
+        {% block title %}{% endblock %}
+    </head>
+    <!-- BODY -->
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="nav-container">
+                <nav>
+                    <div class="nav-title">
+                        <h2>LITReview</h2>
+                    </div>
+                    <div class="navigation">
+                        {% block navigation %}{% endblock %}
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- Main -->
+        <main>
+            <!-- Section -->
+            <section>
+                <div class="review">
+                    {% block review %}{% endblock %}
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <h2>LITReview</h2>
+            </div>
+        </footer>
+
+    </body>
+</html>
