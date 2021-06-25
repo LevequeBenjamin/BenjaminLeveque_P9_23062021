@@ -9,7 +9,7 @@
     <li><a href="{% url 'flux:home' %}">Flux</a></li>
     <li><a href="{% url 'flux:posts' %}">Posts</a></li>
     <li>Abonnements</li>
-    <li>Se déconnecter</li>
+    <li><a href="{% url 'accounts:logout' %}">Se déconnecter</a></li>
 </ul>
 {% endblock %}
 
@@ -29,8 +29,8 @@
                 <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
                 {% endif %}
                 <div class="ticket_btn-container">
-                    <a href="">Modifier</a>
-                    <a href="{% url 'flux:delete-ticket' post.id%}">Supprimer</a>
+                    <a href="{% url 'flux:update-ticket' post.id %}">Modifier</a>
+                    <a href="{% url 'flux:delete-ticket' post.id %}">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -55,14 +55,14 @@
                 </div>
                 <div class="ticket_btn-container">
                     <a href="">Modifier</a>
-                    <a href="" onclick="return confim('Etes-vous sûr?');">Supprimer</a>
+                    <a href="{% url 'flux:delete-review' post.id %}">Supprimer</a>
                 </div>
             </div>
         </div>
     {% endif %}
 {% endfor %}
 {% else %}
-    <h2>Vide</h2>
+    <h2>Vous avez posté ou demandé aucune critique</h2>
 {% endif %}
 
 

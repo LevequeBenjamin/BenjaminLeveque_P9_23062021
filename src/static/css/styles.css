@@ -1,17 +1,36 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	list-style-type: none;
-	outline: none;
-	border: none;
-	text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
 }
+
 body {
     line-height: 1.4rem;
     position: relative;
-    background-color: #12202A;
-    color: whitesmoke;
+    background-color: #193549;
+    color: white;
+}
+
+main {
+    margin: 180px auto auto auto;
+    max-width: 1440px;
+    overflow: hidden;
+    min-height: 70vh;
+}
+
+section {
+    margin: auto;
+    max-width: 768px;
+    min-height: 50vh;
+}
+
+h1 {
+    color: #CCB304;
+    font-size: 2rem;
 }
 
 .center {
@@ -21,14 +40,15 @@ body {
 }
 
 .nav-container {
-    background-color: #12202A;
-    border-bottom: solid 2px #006fed;
+    background-color: #193549;
+    border-bottom: solid 1px #85F8E2;
     position: fixed;
     width: 100%;
     height: 100px;
     z-index: 2;
     top: 0;
 }
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -39,92 +59,211 @@ nav {
     align-items: center;
     font-size: 0.8rem;
 }
-.navigation ul{
+
+.navigation ul {
     display: flex;
 }
-.navigation ul li{
-    margin: 10px;
+
+.navigation ul li a{
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-main {
-    margin: 180px auto auto auto;
-    max-width: 1440px;
-    overflow: hidden;
-}
-section {
-    margin: auto;
-    max-width: 768px;
+.navigation ul li :hover {
+    background-color: #ff7b77;
 }
 
-.btn-flux-container{
+.accounts-container{
+    background-color: #162E41;
+    display: flex;
+    justify-content: space-around;
+    height: 300px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.signup-container {
+    background-color: #162E41;
+    min-height: 250px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.signup-container form input[type=submit] {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.signup-container .helptext, ul {
+    display: none;
+}
+
+.signup-container .errorlist{
+    display: block;
+    color: red;
+}
+
+.signup-container form p {
+    margin: 20px 0 20px 0;
+}
+
+.signup-container form input[type=text], input[type=password] {
+    border-radius: 5px;
+    background-color: #ffd0c4;
+    padding: 5px;
+}
+
+.accounts-signup, .accounts-login {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.accounts-signup a {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.accounts-login form p{
+    margin: 20px 0 20px 0;
+}
+
+.accounts-login form input[type=text], input[type=password] {
+    border-radius: 5px;
+    background-color: #ffd0c4;
+    padding: 5px;
+}
+
+.accounts-login form input[type=submit] {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.accounts-login .errorlist {
+    display: block;
+    color: red;
+    position: absolute;
+    bottom: -120px;
+}
+
+.btn-flux-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 40px;
 }
-.btn-flux-container a{
+
+.btn-flux-container a {
     border: solid 1px #8599A5;
     border-radius: 5px;
     height: 40px;
     width: 200px;
+    background-color: #85F8E2;
+    color: #162E41;
 }
 
-.ticket-container, .review-container{
+.btn-flux-container :hover {
+    background-color: #ff7b77;
+}
+
+.ticket-container, .review-container {
     border: solid 1px #8599A5;
     border-radius: 5px;
     padding: 20px;
     margin: 20px 0 20px 0;
 }
 
-.review-ticket{
-    background-color: #162733;
+.review-ticket {
+    background-color: #162E41;
     border: solid 1px #8599A5;
     border-radius: 5px;
     padding: 10px;
 }
 
+.create-ticket-container {
+    background-color: #162E41;
+    min-height: 300px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+footer {
+    border-top: solid 1px #85F8E2;
+}
+
 .footer {
     width: 100%;
     height: 200px;
-    color: #8599A5;
-    border-top: solid 2px #006fed;
+    color: white;
 }
+
 .footer-container {
     max-width: 1440px;
     margin: auto;
     flex-direction: column;
     display: flex;
-	justify-content: center;
-	align-items: center;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
+
 .footer-container h2 {
-    color: whitesmoke;
+    color: #CCB304;
     font-size: 2rem;
     margin-bottom: 20px;
 }
+
 .social {
     display: flex;
 }
+
 .social__mg {
     font-size: 1.4rem;
     margin: 10px 10px 20px 10px;
 }
+
 .social__mg a {
     text-decoration: none;
-    color: grey;
-}
-.social__mg a :hover {
     color: white;
 }
 
-.copyright p{
+.social__mg a :hover {
+    color: #ff7b77;
+}
+
+.copyright p {
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
+
 .mentions-legales {
-    color: grey;
-}
-.mentions-legales :hover {
     color: white;
+}
+
+.mentions-legales :hover {
+    color: #ff7b77;
 }

@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+  <title>LITReview | Connectez-vous</title>
+{% endblock %}
+
+
+{% block content %}
+  <div class="accounts-container">
+    <div class="accounts-signup">
+      <h2>Inscrivez-vous maintenant</h2>
+      <a href="{% url 'accounts:signup' %}">S'inscrire</a>
+    </div>
+    <div class="accounts-login">
+      <h2>Connectez-vous</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Connexion">
+      </form>
+    </div>
+  </div>
+{% endblock %}
