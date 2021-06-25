@@ -1,0 +1,130 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style-type: none;
+	outline: none;
+	border: none;
+	text-decoration: none;
+}
+body {
+    line-height: 1.4rem;
+    position: relative;
+    background-color: #12202A;
+    color: whitesmoke;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-container {
+    background-color: #12202A;
+    border-bottom: solid 2px #006fed;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+    top: 0;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    align-items: center;
+    font-size: 0.8rem;
+}
+.navigation ul{
+    display: flex;
+}
+.navigation ul li{
+    margin: 10px;
+}
+
+main {
+    margin: 180px auto auto auto;
+    max-width: 1440px;
+    overflow: hidden;
+}
+section {
+    margin: auto;
+    max-width: 768px;
+}
+
+.btn-flux-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+.btn-flux-container a{
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+}
+
+.ticket-container, .review-container{
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0 20px 0;
+}
+
+.review-ticket{
+    background-color: #162733;
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.footer {
+    width: 100%;
+    height: 200px;
+    color: #8599A5;
+    border-top: solid 2px #006fed;
+}
+.footer-container {
+    max-width: 1440px;
+    margin: auto;
+    flex-direction: column;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    text-align: center;
+}
+.footer-container h2 {
+    color: whitesmoke;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.social {
+    display: flex;
+}
+.social__mg {
+    font-size: 1.4rem;
+    margin: 10px 10px 20px 10px;
+}
+.social__mg a {
+    text-decoration: none;
+    color: grey;
+}
+.social__mg a :hover {
+    color: white;
+}
+
+.copyright p{
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.mentions-legales {
+    color: grey;
+}
+.mentions-legales :hover {
+    color: white;
+}

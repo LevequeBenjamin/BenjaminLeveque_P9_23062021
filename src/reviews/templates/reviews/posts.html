@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>LITReview | Accueil</title>
+<title>LITReview | Vos posts</title>
 {% endblock %}
 
 {% block navigation %}
 <ul>
-    <li><a href="{% url 'flux:home' %}" >Flux</a></li>
+    <li><a href="{% url 'flux:home' %}">Flux</a></li>
     <li><a href="{% url 'flux:posts' %}">Posts</a></li>
     <li>Abonnements</li>
     <li>Se déconnecter</li>
@@ -14,11 +14,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="btn-flux-container">
-    <a class="btn-ticket center" href="{% url 'flux:create-ticket' %}">Demander une critique</a>
-    <a class="btn-review center" href="">Créer une critique</a>
-</div>
-{% for post in flux_list %}
+{% if posts_list %}
+    <h2>Vos posts</h2>
+{% for post in posts_list %}
     {% if post.title %}
         <div class="ticket-container">
             <div class="ticket">
@@ -31,10 +29,8 @@
                 <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
                 {% endif %}
                 <div class="ticket_btn-container">
-                    {% if post.id in ticket_btn_hide or post.user == request.user %}
-                    {% else %}
-                        <a class="" href="">Donner son avis</a>
-                    {% endif %}
+                    <a href="">Modifier</a>
+                    <a href="{% url 'flux:delete-ticket' post.id%}">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -57,10 +53,17 @@
                     <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
                     {% endif %}
                 </div>
+                <div class="ticket_btn-container">
+                    <a href="">Modifier</a>
+                    <a href="" onclick="return confim('Etes-vous sûr?');">Supprimer</a>
+                </div>
             </div>
         </div>
     {% endif %}
 {% endfor %}
+{% else %}
+    <h2>Vide</h2>
+{% endif %}
 
 
 {% endblock %}

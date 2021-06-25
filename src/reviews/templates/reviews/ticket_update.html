@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>LITReview | Modifier votre ticket</title>
+{% endblock %}
+
+{% block navigation %}
+<ul>
+    <li><a href="{% url 'flux:home' %}">Flux</a></li>
+    <li><a href="{% url 'flux:posts' %}">Posts</a></li>
+    <li>Abonnements</li>
+    <li>Se déconnecter</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+  <h2>Modifier votre ticket</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Envoyer">
+  </form>
+{% endblock %}

@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <link rel="icon" href="{% static 'assets/img/litreview-icon.png' %}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- BALISE STYLE -->
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        {% block link %}{% endblock %}
         <!-- FONTAWESOME -->
         <link
                 rel="stylesheet"
@@ -32,17 +35,53 @@
         <main>
             <!-- Section -->
             <section>
-                <div class="flux">
-                    {% block flux %}{% endblock %}
+                <div class="content">
+                    {% block content %}{% endblock %}
                 </div>
             </section>
         </main>
         <!-- Footer -->
         <footer>
-            <div class="footer-container">
-                <h2>LITReview</h2>
-            </div>
-        </footer>
-
+			<nav class="footer">
+				<div class="footer-container">
+					<h2>
+						LITReview
+						<br />
+					</h2>
+					<h3>Rejoignez nous sur :</h3>
+					<div class="social">
+						<div class="social__mg">
+							<a
+								class="social dimI"
+								href="https://www.facebook.com/benjamin.lvq.1"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i class="fab fa-facebook-f" aria-hidden="true">Facebook</i>
+							</a>
+						</div>
+						<div class="social__mg">
+							<a
+								class="social dimI"
+								href="https://twitter.com/LvqueBenjamin2"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i class="fab fa-twitter" aria-hidden="true">Twitter</i>
+							</a>
+						</div>
+					</div>
+					<div class="copyright">
+						<p>
+							<i class="far fa-copyright"></i> 2021 developped by Benjamin
+							Lévêque
+						</p>
+					</div>
+					<a href="" class="mentions-legales">
+						<h3>Mentions légales</h3>
+					</a>
+				</div>
+			</nav>
+		</footer>
     </body>
 </html>
