@@ -1,10 +1,15 @@
 from itertools import chain
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
+from reviews.forms import CustomReviewForm, CustomTicketForm
 from reviews.models import Ticket, Review
+from extra_views import CreateWithInlinesView, InlineFormSetFactory
 
 
 class FluxView(LoginRequiredMixin, ListView):
@@ -50,8 +55,8 @@ class PostsView(LoginRequiredMixin, ListView):
 
 class TicketCreate(LoginRequiredMixin, CreateView):
     model = Ticket
+    form_class = CustomTicketForm
     template_name = "reviews/ticket_create.html"
-    fields = ["title", "description", "image", ]
 
 
 class TicketUpdate(LoginRequiredMixin, UpdateView):
@@ -66,18 +71,61 @@ class TicketDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("flux:posts")
 
 
-# class ReviewCreate(LoginRequiredMixin, CreateView):
-#     model = Review
-#     template_name = "reviews/review_create.html"
-#     fields = ["title", "description", "image", ]
-#
-#
-# class ReviewUpdate(LoginRequiredMixin, UpdateView):
-#     model = Review
-#     template_name = "reviews/review_update.html"
-#     fields = ["title", "description", "image", ]
-#
-#
+class ReviewCreate(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = CustomReviewForm
+    template_name = "reviews/review_create.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewCreate, self).get_context_data(**kwargs)
+        context["ticket_form"] = CustomTicketForm
+        return context
+
+    def form_valid(self, form):
+        if self.request.method == "POST":
+            form_2 = CustomTicketForm(self.request.POST, self.request.FILES)
+            if form_2.is_valid() and form.is_valid():
+                ticket = form_2.save(commit=False)
+                ticket.save()
+                self.object = form.save(commit=False)
+                self.object.ticket = ticket
+                self.object.save()
+                return redirect("flux:home")
+
+
+class ReviewResponseCreate(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = CustomReviewForm
+    template_name = "reviews/review_response_create.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewResponseCreate, self).get_context_data(**kwargs)
+        ticket = get_object_or_404(Ticket, pk=self.kwargs["pk"])
+        context["ticket"] = ticket
+        return context
+
+    def form_valid(self, form):
+        if self.request.method == "POST":
+            if form.is_valid():
+                self.object = form.save(commit=False)
+                ticket = get_object_or_404(Ticket, pk=self.kwargs["pk"])
+                self.object.ticket = ticket
+                self.object.save()
+                return redirect("flux:home")
+
+
+class TicketDetail(LoginRequiredMixin, DetailView):
+    model = Ticket
+    template_name = "reviews/review_response_create.html"
+    context_object_name = "post"
+
+
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
+    model = Review
+    template_name = "reviews/review_update.html"
+    fields = ["headline", "rating", "body", ]
+
+
 class ReviewDelete(LoginRequiredMixin, DeleteView):
     model = Review
     context_object_name = "post"

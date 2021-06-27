@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'reviews',
     'django_userforeignkey',
-
+    'crispy_forms',
+    'extra_views',
 ]
 
 MIDDLEWARE = [

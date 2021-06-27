@@ -20,7 +20,7 @@
     {% if post.title %}
         <div class="ticket-container">
             <div class="ticket">
-                <p><span class="ticket-user">{{ post.user }} a demandé une critique</span>
+                <p class="ticket-header"><span class="ticket-user">Vous avez demandé un critique</span>
                     <span class="ticket-time">{{ post.time_created }}</span>
                 </p>
                 <p>{{ post.title }}</p>
@@ -29,22 +29,68 @@
                 <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
                 {% endif %}
                 <div class="ticket_btn-container">
-                    <a href="{% url 'flux:update-ticket' post.id %}">Modifier</a>
-                    <a href="{% url 'flux:delete-ticket' post.id %}">Supprimer</a>
+                    <div class="ticket_btn-container-update">
+                        <a href="{% url 'flux:update-ticket' post.id %}">Modifier</a>
+                    </div>
+                    <div class="ticket_btn-container-delete">
+                        <a href="{% url 'flux:delete-ticket' post.id %}">Supprimer</a>
+                    </div>
                 </div>
             </div>
         </div>
     {% elif post.rating %}
         <div class="review-container">
             <div class="review">
-                <p><span class="review-user">{{ post.user }} a posté une critique</span>
+                <p><span class="review-user">Vous avez publié une critique</span>
                     <span class="review-time">{{ post.time_created }}</span>
                 </p>
-                <p>{{ post.headline }}
-                <p>Rating: {{ post.rating }} <span class="fas fa-star"></span></p>
+                <h3>{{ post.headline }}  -
+                    {% if post.rating == 0 %}
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    {% endif %}
+                    {% if post.rating == 1 %}
+                    <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    {% endif %}
+                    {% if post.rating == 2 %}
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    {% endif %}
+                    {% if post.rating == 3 %}
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
+                    <span class="far fa-star"></span>
+                    {% endif %}
+                    {% if post.rating == 4 %}
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
+                    {% endif %}
+                    {% if post.rating == 5 %}
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    <span class="fas fa-star"></span>
+                    {% endif %}
+                </h3>
                 <p>{{post.body}}</p>
                 <div class="review-ticket">
-                    <p><span class="review-ticket-user">{{post.ticket.user}}</span>
+                    <p class="review-header"><span class="review-ticket-user">Ticket - Vous</span>
                         <span class="review-ticket-time">{{post.ticket.time_created}}</span>
                     </p>
                     <p>{{post.ticket.title}}</p>
@@ -54,8 +100,12 @@
                     {% endif %}
                 </div>
                 <div class="ticket_btn-container">
-                    <a href="">Modifier</a>
-                    <a href="{% url 'flux:delete-review' post.id %}">Supprimer</a>
+                    <div class="ticket_btn-container-update">
+                        <a href="">Modifier</a>
+                    </div>
+                    <div class="ticket_btn-container-delete">
+                        <a href="{% url 'flux:delete-review' post.id %}">Supprimer</a>
+                    </div>
                 </div>
             </div>
         </div>

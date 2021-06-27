@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+/* ********** Base ********** */
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +16,7 @@ body {
     position: relative;
     background-color: #193549;
     color: white;
+    font-family: 'Didact Gothic', sans-serif;
 }
 
 main {
@@ -39,6 +43,7 @@ h1 {
     align-items: center;
 }
 
+/* ********** header ********** */
 .nav-container {
     background-color: #193549;
     border-bottom: solid 1px #85F8E2;
@@ -57,15 +62,16 @@ nav {
     max-width: 1440px;
     margin: 0 auto;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
 }
 
 .navigation ul {
     display: flex;
 }
 
-.navigation ul li a{
+.navigation ul li a {
     color: white;
+    font-weight: bold;
     padding: 10px;
     border-radius: 5px;
 }
@@ -74,143 +80,7 @@ nav {
     background-color: #ff7b77;
 }
 
-.accounts-container{
-    background-color: #162E41;
-    display: flex;
-    justify-content: space-around;
-    height: 300px;
-    border: solid 1px darkgrey;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-.signup-container {
-    background-color: #162E41;
-    min-height: 250px;
-    border: solid 1px darkgrey;
-    padding: 20px;
-    border-radius: 5px;
-    position: relative;
-}
-
-.signup-container form input[type=submit] {
-    border-radius: 5px;
-    background-color: #ff7b77;
-    padding: 10px;
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
-    color: #162E41;
-    font-weight: bold;
-}
-
-.signup-container .helptext, ul {
-    display: none;
-}
-
-.signup-container .errorlist{
-    display: block;
-    color: red;
-}
-
-.signup-container form p {
-    margin: 20px 0 20px 0;
-}
-
-.signup-container form input[type=text], input[type=password] {
-    border-radius: 5px;
-    background-color: #ffd0c4;
-    padding: 5px;
-}
-
-.accounts-signup, .accounts-login {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-}
-
-.accounts-signup a {
-    border-radius: 5px;
-    background-color: #ff7b77;
-    padding: 10px;
-    color: #162E41;
-    font-weight: bold;
-}
-
-.accounts-login form p{
-    margin: 20px 0 20px 0;
-}
-
-.accounts-login form input[type=text], input[type=password] {
-    border-radius: 5px;
-    background-color: #ffd0c4;
-    padding: 5px;
-}
-
-.accounts-login form input[type=submit] {
-    border-radius: 5px;
-    background-color: #ff7b77;
-    padding: 10px;
-    position: absolute;
-    right: 0;
-    cursor: pointer;
-    color: #162E41;
-    font-weight: bold;
-}
-
-.accounts-login .errorlist {
-    display: block;
-    color: red;
-    position: absolute;
-    bottom: -120px;
-}
-
-.btn-flux-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-}
-
-.btn-flux-container a {
-    border: solid 1px #8599A5;
-    border-radius: 5px;
-    height: 40px;
-    width: 200px;
-    background-color: #85F8E2;
-    color: #162E41;
-}
-
-.btn-flux-container :hover {
-    background-color: #ff7b77;
-}
-
-.ticket-container, .review-container {
-    border: solid 1px #8599A5;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px 0 20px 0;
-}
-
-.review-ticket {
-    background-color: #162E41;
-    border: solid 1px #8599A5;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.create-ticket-container {
-    background-color: #162E41;
-    min-height: 300px;
-    border: solid 1px darkgrey;
-    padding: 20px;
-    border-radius: 5px;
-    position: relative;
-}
-
+/* ********** footer ********** */
 footer {
     border-top: solid 1px #85F8E2;
 }
@@ -256,7 +126,6 @@ footer {
 }
 
 .copyright p {
-    font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
@@ -266,4 +135,257 @@ footer {
 
 .mentions-legales :hover {
     color: #ff7b77;
+}
+
+/* ********** accounts templates ********** */
+.accounts-container {
+    background-color: #162E41;
+    display: flex;
+    justify-content: space-around;
+    height: 300px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.signup-container {
+    background-color: #162E41;
+    min-height: 250px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.signup-container form input[type=submit] {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.signup-container form input[type=submit]:hover,
+.accounts-login form input[type=submit]:hover,
+.accounts-signup a:hover{
+    background-color: #85F8E2;
+}
+
+.signup-container .helptext {
+    display: none;
+}
+
+.signup-container .errorlist {
+    display: block;
+    color: red;
+}
+
+.signup-container form p,
+.accounts-login form p {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+}
+
+.signup-container form input[type=text], input[type=password] {
+    border-radius: 5px;
+    background-color: #ffd0c4;
+    padding: 5px;
+}
+
+.accounts-signup, .accounts-login {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.accounts-signup a {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.accounts-login form p {
+    margin: 20px 0 20px 0;
+}
+
+.accounts-login form input[type=text], input[type=password] {
+    border-radius: 5px;
+    background-color: #ffd0c4;
+    padding: 5px;
+}
+
+.accounts-login form input[type=submit] {
+    border-radius: 5px;
+    background-color: #ff7b77;
+    padding: 10px;
+    cursor: pointer;
+    color: #162E41;
+    font-weight: bold;
+}
+
+.accounts-login .errorlist {
+    display: block;
+    color: red;
+    position: absolute;
+    bottom: -120px;
+}
+
+/* ********** reviews templates ********** */
+.btn-flux-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.btn-flux-container a {
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+    background-color: #85F8E2;
+    font-weight: bold;
+    color: #162E41;
+}
+
+.btn-flux-container :hover {
+    background-color: #ff7b77;
+}
+
+.ticket-container, .review-container {
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0 20px 0;
+}
+
+.fa-star {
+    color: #ff7b77;
+}
+
+.ticket {
+    position: relative;
+}
+
+.ticket img {
+    margin: 10px;
+    object-fit: cover;
+    height: 200px;
+    width: 140px;
+}
+
+.ticket_btn-container-create,
+.ticket_btn-container-update,
+.ticket_btn-container-delete {
+    background-color: #CCB304;
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.ticket_btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ticket_btn-container a {
+    font-weight: bold;
+    color: #162E41;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket_btn-container-create:hover,
+.ticket_btn-container-update:hover,
+.ticket_btn-container-delete:hover {
+    background-color: #ff7b77;
+}
+
+.review-header, .ticket-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review h3 {
+    margin: 20px 0 20px 0;
+}
+
+.review-ticket {
+    background-color: #162E41;
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.review-ticket img {
+    margin: 10px;
+    object-fit: cover;
+    height: 200px;
+    width: 140px;
+}
+
+.create-ticket-container, .create-review-container {
+    background-color: #162E41;
+    min-height: 300px;
+    border: solid 1px darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.create-ticket-container form input[type=text],
+.create-review-container form input[type=text],
+#id_body, #id_description {
+    border-radius: 5px;
+    background-color: #ffd0c4;
+    padding: 5px;
+}
+
+#id_rating {
+    display: flex;
+}
+
+.review-form, .ticket-form {
+    border: solid 1px darkgrey;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #193549;
+}
+
+.review-form p, .ticket-form p {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+}
+
+.envoyer-btn {
+    background-color: #CCB304;
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.envoyer-btn:hover {
+    background-color: #ff7b77;
+}
+
+.review-response-container {
+    padding: 20px;
+    border: solid 1px #8599A5;
+    border-radius: 5px;
 }

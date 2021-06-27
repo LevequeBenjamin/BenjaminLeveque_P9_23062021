@@ -1,5 +1,6 @@
 from django.urls import path
-from reviews.views import FluxView, TicketCreate, TicketUpdate, PostsView, TicketDelete, ReviewDelete
+from reviews.views import FluxView, TicketCreate, TicketUpdate, PostsView, TicketDelete, ReviewDelete, \
+    ReviewUpdate, ReviewCreate, ReviewResponseCreate
 
 app_name = "flux"
 
@@ -16,5 +17,8 @@ urlpatterns = [
     path('delete-ticket/<int:pk>/', TicketDelete.as_view(), name='delete-ticket'),
 
     # review
+    path('create-review/', ReviewCreate.as_view(), name='create-review'),
+    path('create-review/<int:pk>/', ReviewResponseCreate.as_view(), name='create-response-review'),
+    path('update-review/<int:pk>/', ReviewUpdate.as_view(), name='update-review'),
     path('delete-review/<int:pk>/', ReviewDelete.as_view(), name='delete-review'),
 ]

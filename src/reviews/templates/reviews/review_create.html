@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>LITReview | Créer un ticket</title>
+  <title>LITReview | Créer une critique</title>
 {% endblock %}
 
 {% block navigation %}
@@ -15,11 +15,16 @@
 
 {% block content %}
     <div class="create-ticket-container">
-      <h2>Créer un ticket</h2>
+      <h2>Créer une critique</h2>
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+          <div class="review-form">
+              <h3>Livre / Article</h3>
+            {{ form.as_p }}
+          </div>
           <div class="ticket-form">
-              {{ form.as_p }}
+              <h3>Critique</h3>
+            {{ ticket_form.as_p }}
           </div>
           <div class="ticket_btn-container">
             <input class="envoyer-btn" type="submit" value="Envoyer">

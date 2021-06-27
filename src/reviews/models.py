@@ -8,6 +8,15 @@ from django.urls import reverse
 
 CustomUserModel = get_user_model()
 
+RATING_OPTIONS = {
+    ("0", "0"),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4", "4"),
+    ("5", "5")
+}
+
 
 class Ticket(models.Model):
     title = models.CharField(max_length=128, verbose_name="Titre")
@@ -31,10 +40,10 @@ class Ticket(models.Model):
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
-        # validates that rating must be between 0 and 5
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+    )
     headline = models.CharField(max_length=128)
-    body = models.CharField(max_length=8192, blank=True)
+    body = models.TextField(max_length=8192, blank=True)
     user = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now=True)
 
