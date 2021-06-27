@@ -101,7 +101,7 @@
                 </div>
                 <div class="ticket_btn-container">
                     <div class="ticket_btn-container-update">
-                        <a href="">Modifier</a>
+                        <a href="{% url 'flux:update-review' post.id post.ticket.id %}">Modifier</a>
                     </div>
                     <div class="ticket_btn-container-delete">
                         <a href="{% url 'flux:delete-review' post.id %}">Supprimer</a>

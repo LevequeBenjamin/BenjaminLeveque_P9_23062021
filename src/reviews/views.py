@@ -1,15 +1,14 @@
+# lib
 from itertools import chain
-
+# django
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-
+# forms
 from reviews.forms import CustomReviewForm, CustomTicketForm
+# models
 from reviews.models import Ticket, Review
-from extra_views import CreateWithInlinesView, InlineFormSetFactory
 
 
 class FluxView(LoginRequiredMixin, ListView):
@@ -38,18 +37,12 @@ class PostsView(LoginRequiredMixin, ListView):
     template_name = "reviews/posts.html"
 
     def get_context_data(self, **kwargs):
-        ticket_btn_hide = []
         context = super(PostsView, self).get_context_data(**kwargs)
         tickets = Ticket.objects.filter(user=self.request.user)
         reviews = Review.objects.filter(user=self.request.user)
         context['posts_list'] = list(sorted(chain(tickets, reviews),
                                             key=lambda post: post.time_created,
                                             reverse=True))
-        for review in reviews:
-            if self.request.user == review.user:
-                ticket_btn_hide.append(review.ticket.id)
-        context['ticket_btn_hide'] = ticket_btn_hide
-        context['request'] = self.request
         return context
 
 
@@ -63,6 +56,7 @@ class TicketUpdate(LoginRequiredMixin, UpdateView):
     model = Ticket
     template_name = "reviews/ticket_update.html"
     fields = ["title", "description", "image", ]
+    success_url = reverse_lazy("flux:posts")
 
 
 class TicketDelete(LoginRequiredMixin, DeleteView):
@@ -114,19 +108,20 @@ class ReviewResponseCreate(LoginRequiredMixin, CreateView):
                 return redirect("flux:home")
 
 
-class TicketDetail(LoginRequiredMixin, DetailView):
-    model = Ticket
-    template_name = "reviews/review_response_create.html"
-    context_object_name = "post"
-
-
 class ReviewUpdate(LoginRequiredMixin, UpdateView):
     model = Review
     template_name = "reviews/review_update.html"
     fields = ["headline", "rating", "body", ]
+    success_url = reverse_lazy("flux:posts")
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewUpdate, self).get_context_data(**kwargs)
+        ticket = get_object_or_404(Ticket, pk=self.kwargs["id_ticket"])
+        context["ticket"] = ticket
+        return context
 
 
 class ReviewDelete(LoginRequiredMixin, DeleteView):
     model = Review
     context_object_name = "post"
-    success_url = reverse_lazy("flux:home")
+    success_url = reverse_lazy("flux:posts")

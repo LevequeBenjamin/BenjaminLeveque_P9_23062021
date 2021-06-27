@@ -384,7 +384,8 @@ footer {
     background-color: #ff7b77;
 }
 
-.review-response-container {
+.review-response-container,
+.review-update-container {
     padding: 20px;
     border: solid 1px #8599A5;
     border-radius: 5px;
