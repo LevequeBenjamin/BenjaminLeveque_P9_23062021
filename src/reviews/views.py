@@ -78,19 +78,18 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         if self.request.method == "POST":
             form_2 = CustomTicketForm(self.request.POST, self.request.FILES)
-            if form_2.is_valid() and form.is_valid():
+            if form_2.is_valid():
                 ticket = form_2.save(commit=False)
                 ticket.save()
-                self.object = form.save(commit=False)
-                self.object.ticket = ticket
-                self.object.save()
-                return redirect("flux:home")
+                form.instance.ticket = ticket
+        return super().form_valid(form)
 
 
 class ReviewResponseCreate(LoginRequiredMixin, CreateView):
     model = Review
     form_class = CustomReviewForm
     template_name = "reviews/review_response_create.html"
+    success_url = reverse_lazy("flux:home")
 
     def get_context_data(self, **kwargs):
         context = super(ReviewResponseCreate, self).get_context_data(**kwargs)
@@ -99,13 +98,9 @@ class ReviewResponseCreate(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        if self.request.method == "POST":
-            if form.is_valid():
-                self.object = form.save(commit=False)
-                ticket = get_object_or_404(Ticket, pk=self.kwargs["pk"])
-                self.object.ticket = ticket
-                self.object.save()
-                return redirect("flux:home")
+        ticket = get_object_or_404(Ticket, pk=self.kwargs["pk"])
+        form.instance.ticket = ticket
+        return super().form_valid(form)
 
 
 class ReviewUpdate(LoginRequiredMixin, UpdateView):

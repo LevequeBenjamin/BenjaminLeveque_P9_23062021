@@ -54,6 +54,10 @@ class Review(models.Model):
     def __str__(self):
         return self.headline
 
+    @staticmethod
+    def get_absolute_url():
+        return reverse("flux:posts")
+
 
 class UserFollows(models.Model):
     user = models.ForeignKey(

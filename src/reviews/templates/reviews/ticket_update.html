@@ -5,12 +5,7 @@
 {% endblock %}
 
 {% block navigation %}
-<ul>
-    <li><a href="{% url 'flux:home' %}">Flux</a></li>
-    <li><a href="{% url 'flux:posts' %}">Posts</a></li>
-    <li>Abonnements</li>
-    <li>Se déconnecter</li>
-</ul>
+    {% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}

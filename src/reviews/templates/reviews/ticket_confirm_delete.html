@@ -4,6 +4,10 @@
 <title>LITRevie | Supprimer un ticket</title>
 {% endblock %}
 
+{% block navigation %}
+    {% include "reviews/nav.html" %}
+{% endblock %}
+
 {% block content %}
   <form method="POST">
     {% csrf_token %}
