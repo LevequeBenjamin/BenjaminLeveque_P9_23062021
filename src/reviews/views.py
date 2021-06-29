@@ -1,14 +1,16 @@
 # lib
 from itertools import chain
 # django
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 # forms
-from reviews.forms import CustomReviewForm, CustomTicketForm
+from accounts.models import CustomUser
+from reviews.forms import CustomReviewForm, CustomTicketForm, FollowForm
 # models
-from reviews.models import Ticket, Review
+from reviews.models import Ticket, Review, UserFollows
 
 
 class FluxView(LoginRequiredMixin, ListView):
@@ -120,3 +122,28 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
     model = Review
     context_object_name = "post"
     success_url = reverse_lazy("flux:posts")
+
+
+class FollowCreate(LoginRequiredMixin, CreateView):
+    model = UserFollows
+    form_class = FollowForm
+    template_name = "reviews/follow_create.html"
+    success_url = reverse_lazy("flux:create-follow")
+
+    def get_form_kwargs(self):
+        kwargs = super(FollowCreate, self).get_form_kwargs()
+        kwargs.update({'request_user': self.request.user})
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(FollowCreate, self).get_context_data(**kwargs)
+        users_following = UserFollows.objects.filter(user=self.request.user)
+        users_follower = UserFollows.objects.filter(followed_user=self.request.user)
+        context["users_following"] = users_following
+        context["users_follower"] = users_follower
+        return context
+
+    def form_valid(self, form):
+        user = get_object_or_404(CustomUser, username=self.request.user)
+        form.instance.followed_user = user
+        return super().form_valid(form)
