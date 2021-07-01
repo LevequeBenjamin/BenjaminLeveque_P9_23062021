@@ -1,7 +1,7 @@
+# django
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django_userforeignkey.models.fields import UserForeignKey
 
 # settings.AUTH_USER_MODEL
 from django.urls import reverse
@@ -21,9 +21,11 @@ RATING_OPTIONS = {
 class Ticket(models.Model):
     title = models.CharField(max_length=128, verbose_name="Titre")
     description = models.TextField(max_length=2048, blank=True)
-    user = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=CustomUserModel, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     time_created = models.DateTimeField(auto_now=True)
+    response = models.BooleanField(default=False)
+    his_review = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-time_created"]
@@ -44,7 +46,7 @@ class Review(models.Model):
     )
     headline = models.CharField(max_length=128)
     body = models.TextField(max_length=8192, blank=True)
-    user = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=CustomUserModel, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -71,3 +73,4 @@ class UserFollows(models.Model):
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user',)
+        verbose_name = "UserFollow"

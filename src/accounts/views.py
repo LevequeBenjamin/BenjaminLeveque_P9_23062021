@@ -10,4 +10,4 @@ class SignUpView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('accounts:login')
     form_class = UserRegisterForm
     template_name = "accounts/signup.html"
-    success_message = "Votre profil est créé avec succés"
+    success_message = "Votre profil est créé avec succés, vous pouvez maintenant vous connecter."

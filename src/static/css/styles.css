@@ -146,6 +146,7 @@ footer {
     border: solid 1px darkgrey;
     padding: 20px;
     border-radius: 5px;
+    position: relative;
 }
 
 .signup-container {
@@ -193,6 +194,13 @@ footer {
     border-radius: 5px;
     background-color: #ffd0c4;
     padding: 5px;
+}
+
+.signup-success {
+    color: lime;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
 }
 
 .accounts-signup, .accounts-login {
@@ -259,7 +267,11 @@ footer {
     background-color: #ff7b77;
 }
 
-.ticket-container, .review-container {
+.ticket-container,
+.review-container,
+.follow-container,
+.follower-container,
+.followed-container {
     border: solid 1px #8599A5;
     border-radius: 5px;
     padding: 20px;
@@ -279,6 +291,13 @@ footer {
     object-fit: cover;
     height: 200px;
     width: 140px;
+}
+
+.ticket-response {
+    display: flex;
+    justify-content: flex-end;
+    color: #CCB304;
+    font-weight: bold;
 }
 
 .ticket_btn-container-create,
@@ -336,7 +355,8 @@ footer {
     width: 140px;
 }
 
-.create-ticket-container, .create-review-container {
+.create-ticket-container,
+.create-review-container {
     background-color: #162E41;
     min-height: 300px;
     border: solid 1px darkgrey;
@@ -347,6 +367,7 @@ footer {
 
 .create-ticket-container form input[type=text],
 .create-review-container form input[type=text],
+.follow-container form input[type=text],
 #id_body, #id_description {
     border-radius: 5px;
     background-color: #ffd0c4;
@@ -357,7 +378,9 @@ footer {
     display: flex;
 }
 
-.review-form, .ticket-form {
+.review-form,
+.ticket-form,
+.follow-form {
     border: solid 1px darkgrey;
     margin: 10px;
     padding: 10px;
@@ -365,7 +388,9 @@ footer {
     background-color: #193549;
 }
 
-.review-form p, .ticket-form p {
+.review-form p,
+.ticket-form p,
+.follow-form p {
     display: flex;
     flex-direction: column;
     margin: 10px 0 10px 0;
@@ -389,4 +414,27 @@ footer {
     padding: 20px;
     border: solid 1px #8599A5;
     border-radius: 5px;
+}
+
+.follower-content,
+.followed-user {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px #8599A5;
+    border-radius: 5px;
+    background-color: #162E41;
+}
+
+.follower-btn a {
+    color: #85F8E2;
+}
+
+.follower-btn a:hover {
+    color: #ff7b77;
+}
+
+.follow-container .errorlist {
+    color: red;
 }

@@ -15,33 +15,57 @@
 </div>
 {% if flux_list %}
 {% for post in flux_list %}
-    {% if post.title %}
-        <div class="ticket-container">
-            <div class="ticket">
-                <p class="ticket-header"><span class="ticket-user">{{ post.user }} a demandé une critique</span>
-                    <span class="ticket-time">{{ post.time_created }}</span>
-                </p>
-                <p>{{ post.title }}</p>
-                <p>{{ post.description }}</p>
-                {% if post.image %}
-                <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
-                {% endif %}
-                {% if post.id in ticket_btn_hide or post.user == request.user %}
-                {% else %}
-                    <div class="ticket_btn-container">
-                        <div class="ticket_btn-container-create">
-                            <a class="" href="{% url 'flux:create-response-review' post.id %}">Donner son avis</a>
+    {% if post.content_type == "TICKET" %}
+            <div class="ticket-container">
+                <div class="ticket">
+                    {% if post.user == request.user %}
+                    <p class="ticket-header"><span class="ticket-user"> Vous avez demandé une critique</span>
+                        <span class="ticket-time">{{ post.time_created }}</span>
+                    </p>
+                    {% else %}
+                    <p class="ticket-header"><span class="ticket-user">{{ post.user }} a demandé une critique</span>
+                        <span class="ticket-time">{{ post.time_created }}</span>
+                    </p>
+                    {% endif %}
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.description }}</p>
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
+                    {% endif %}
+                    {% if post.user == request.user or post.response %}
+                        {% if post.response == True %}
+                            <div class="ticket-response">
+                                <p>Le ticket a déjà recu une réponse.</p>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="ticket_btn-container">
+                            <div class="ticket_btn-container-create">
+                                <a class="" href="{% url 'flux:create-response-review' post.id %}">Donner son avis</a>
+                            </div>
                         </div>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    {% elif post.rating %}
+    {% elif post.content_type == "REVIEW"  or "FOLLOWER_REVIEW" %}
         <div class="review-container">
             <div class="review">
-                <p class="review-header"><span class="review-user">{{ post.user }} a posté une critique</span>
-                    <span class="review-time">{{ post.time_created }}</span>
-                </p>
+                {% if post.user == request.user %}
+                    <p class="review-header"><span class="review-user">
+                        Vous avez
+                        {% if post.user != post.ticket.user %}
+                        répondu à
+                        {% else %}
+                        posté
+                        {% endif %}
+                        une critique</span>
+                        <span class="review-time">{{ post.time_created }}</span>
+                    </p>
+                {% else %}
+                    <p class="review-header"><span class="review-user">{{ post.user }} a posté une critique</span>
+                        <span class="review-time">{{ post.time_created }}</span>
+                    </p>
+                {% endif %}
                 <h3>{{ post.headline }}  -
                     {% if post.rating == 0 %}
                     <span class="far fa-star"></span>
@@ -91,7 +115,7 @@
                     <p>Ticket - {{post.ticket.user}}</p>
                     <p>{{post.ticket.title}}</p>
                     {% if post.ticket.image %}
-                    <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
+                        <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
                     {% endif %}
                 </div>
             </div>

@@ -1,6 +1,6 @@
 from django.urls import path
-from reviews.views import FluxView, TicketCreate, TicketUpdate, PostsView, TicketDelete, ReviewDelete, \
-    ReviewUpdate, ReviewCreate, ReviewResponseCreate, FollowCreate
+from reviews.views import FluxView, TicketCreateView, TicketUpdateView, PostsView, TicketDeleteView, ReviewDeleteView, \
+    ReviewUpdateView, ReviewCreateView, ReviewResponseCreateView, FollowCreateView, FollowDeleteView
 
 app_name = "flux"
 
@@ -12,16 +12,17 @@ urlpatterns = [
     path('posts/', PostsView.as_view(), name='posts'),
 
     # ticket
-    path('ticket/', TicketCreate.as_view(), name='create-ticket'),
-    path('ticket/<int:pk>/edit/', TicketUpdate.as_view(), name='update-ticket'),
-    path('ticket/<int:pk>/delete/', TicketDelete.as_view(), name='delete-ticket'),
+    path('ticket/', TicketCreateView.as_view(), name='create-ticket'),
+    path('ticket/<int:pk>/edit/', TicketUpdateView.as_view(), name='update-ticket'),
+    path('ticket/<int:pk>/delete/', TicketDeleteView.as_view(), name='delete-ticket'),
 
     # review
-    path('review/', ReviewCreate.as_view(), name='create-review'),
-    path('review/<int:pk>/', ReviewResponseCreate.as_view(), name='create-response-review'),
-    path('review/<int:pk>/<int:id_ticket>/edit/', ReviewUpdate.as_view(), name='update-review'),
-    path('review/<int:pk>/delete/', ReviewDelete.as_view(), name='delete-review'),
+    path('review/', ReviewCreateView.as_view(), name='create-review'),
+    path('review/<int:pk>/', ReviewResponseCreateView.as_view(), name='create-response-review'),
+    path('review/<int:pk>/<int:id_ticket>/edit/', ReviewUpdateView.as_view(), name='update-review'),
+    path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='delete-review'),
 
     # follows
-    path('follow/', FollowCreate.as_view(), name='create-follow'),
+    path('follows/', FollowCreateView.as_view(), name='create-follow'),
+    path('follow/<int:pk>/delete/', FollowDeleteView.as_view(), name='delete-follow'),
 ]

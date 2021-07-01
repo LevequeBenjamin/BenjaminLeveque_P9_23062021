@@ -85,7 +85,7 @@
                 </h3>
                 <p>{{post.body}}</p>
                 <div class="review-ticket">
-                    <p class="review-header"><span class="review-ticket-user">Ticket - Vous</span>
+                    <p class="review-header"><span class="review-ticket-user">Ticket - {{ post.ticket.user }}</span>
                         <span class="review-ticket-time">{{post.ticket.time_created}}</span>
                     </p>
                     <p>{{post.ticket.title}}</p>

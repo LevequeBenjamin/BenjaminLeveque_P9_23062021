@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import BaseModelFormSet
-from django.shortcuts import get_object_or_404
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
+from django.shortcuts import get_object_or_404, redirect
 
 from accounts.models import CustomUser
 from reviews.models import Review, RATING_OPTIONS, Ticket, UserFollows
@@ -40,10 +41,13 @@ class FollowForm(forms.ModelForm):
     def clean_user(self):
         username = self.cleaned_data.get("user", None)
         users = CustomUser.objects.all()
+        users_follower = UserFollows.objects.filter(followed_user=self.request_user)
         if username == str(self.request_user):
-            raise forms.ValidationError("Vous ne pouvez pas vous follow")
+            raise ValidationError("Vous ne pouvez pas vous follow")
         elif username not in [user.username for user in users]:
-            raise forms.ValidationError("Cet utilisateur n'existe pas")
+            raise ValidationError("Cet utilisateur n'existe pas")
+        if username in [user.user.username for user in users_follower]:
+            raise ValidationError("Cet utilisateur est déjà follow")
         else:
             user = get_object_or_404(CustomUser, username=username)
         return user

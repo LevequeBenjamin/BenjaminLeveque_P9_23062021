@@ -19,5 +19,12 @@
         <input type="submit" value="Connexion">
       </form>
     </div>
+    {% if messages %}
+      <div class="signup-success">
+      {% for m in messages %}
+        <p>{{ m }}</p>
+      {% endfor %}
+    </div>
+{% endif %}
   </div>
 {% endblock %}

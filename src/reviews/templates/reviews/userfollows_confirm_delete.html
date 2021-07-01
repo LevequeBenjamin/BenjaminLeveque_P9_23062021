@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>LITRevie | Supprimer un follow</title>
+{% endblock %}
+
+{% block navigation %}
+    {% include "reviews/nav.html" %}
+{% endblock %}
+
+{% block content %}
+  <form method="POST">
+    {% csrf_token %}
+    <p>Êtes-vous sûr de vouloir vous désabonner de '{{ follow.user }}'?</p>
+
+    <input type="submit" value="Oui, supprimer">
+  </form>
+
+{% endblock %}

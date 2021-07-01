@@ -9,59 +9,41 @@
 {% endblock %}
 
 {% block content %}
-    <div class="create-ticket-container">
+    <div class="follow-container">
       <h2>Suivre d'autres utilisateurs</h2>
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-          <div class="ticket-form">
+          <div class="follow-form">
               {{ form.as_p }}
           </div>
           <div class="ticket_btn-container">
-              {% if messages %}
-                        {% for message in messages %}
-                            <p class="text-danger"> {{message}}</p>
-                        {% endfor %}
-                    {% endif %}
             <input class="envoyer-btn" type="submit" value="Envoyer">
           </div>
       </form>
     </div>
-    <div class="" >
-        <div class="">
-            <table class="">
-                <thead >
-                    <tr>
-                        <th scope="col">Abonnements</th>
-                    </tr>
-                <thead/>
-                <tbody>
-                    {% for user_follow in users_following %}
-                    <tr>
-                        <td>{{user_follow.followed_user}}</td>
-                        <td><button class ="">
-                            <a class="" href=""
-                               onclick="return confirm('Etes-vous sûr ?');">Delete</a></button></td></tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="follower-container" >
+            <div class="follower-title">
+                <h3>Abonnements</h3>
+            </div>
+            {% for user_follow in users_follower %}
+            <div class="follower-content">
+                <div class="follower-user">
+                <p>{{user_follow.user}}</p>
+                </div>
+                <div class="follower-btn">
+                    <a class="" href="{% url 'flux:delete-follow' pk=user_follow.id %}">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
     </div>
-    <div class="" >
-        <div class="">
-            <table class="">
-                <thead >
-                    <tr>
-                        <th scope="col">Abonnés</th>
-                    </tr>
-                <thead/>
-                <tbody>
-                    {% for user_follow in users_follower %}
-                    <tr>
-                        <td>{{user_follow.user}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="followed-container" >
+            <div class="followed-title">
+                <h3>Abonnés</h3>
+            </div>
+                {% for user_follow in users_following %}
+            <div class="followed-user">
+                    <p>{{user_follow.followed_user}}</p>
+            </div>
+                {% endfor %}
     </div>
 {% endblock %}
