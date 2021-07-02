@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>LITRevie | Supprimer une critique</title>
+<title>LITReview | Supprimer une critique</title>
 {% endblock %}
 
 {% block navigation %}
-    {% include "reviews/nav.html" %}
+{% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}
-  <form method="POST">
-    {% csrf_token %}
-    <p>Êtes-vous sûr de vouloir supprimer '{{ post }}'?</p>
+<div class="delete-container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Êtes-vous sûr de vouloir supprimer '{{ post }}'?</p>
 
-    <input type="submit" value="Oui, supprimer">
-  </form>
-
+        <input type="submit" value="Oui, supprimer">
+    </form>
+</div>
 {% endblock %}

@@ -1,49 +1,49 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>LITReview | Créer un ticket</title>
+<title>LITReview | Suivre d'autres utilisateurs</title>
 {% endblock %}
 
 {% block navigation %}
-    {% include "reviews/nav.html" %}
+{% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}
-    <div class="follow-container">
-      <h2>Suivre d'autres utilisateurs</h2>
-      <form method="POST" enctype="multipart/form-data">
+<div class="follow-container">
+    <h2>Suivre d'autres utilisateurs</h2>
+    <form method="POST">
         {% csrf_token %}
-          <div class="follow-form">
-              {{ form.as_p }}
-          </div>
-          <div class="ticket_btn-container">
-            <input class="envoyer-btn" type="submit" value="Envoyer">
-          </div>
-      </form>
+        <div class="follow-form">
+            {{ form.as_p }}
+        </div>
+        <div class="ticket_btn-container">
+            <input class="envoyer-btn" type="submit" value="Suivre">
+        </div>
+    </form>
+</div>
+<div class="follower-container">
+    <div class="follower-title">
+        <h3>Abonnements</h3>
     </div>
-    <div class="follower-container" >
-            <div class="follower-title">
-                <h3>Abonnements</h3>
-            </div>
-            {% for user_follow in users_follower %}
-            <div class="follower-content">
-                <div class="follower-user">
-                <p>{{user_follow.user}}</p>
-                </div>
-                <div class="follower-btn">
-                    <a class="" href="{% url 'flux:delete-follow' pk=user_follow.id %}">Delete</a>
-                </div>
-            </div>
-            {% endfor %}
+    {% for user_follow in users_follower %}
+    <div class="follower-content">
+        <div class="follower-user">
+            <p>{{user_follow.user}}</p>
+        </div>
+        <div class="follower-btn">
+            <a class="" href="{% url 'flux:delete-follow' pk=user_follow.id %}">Delete</a>
+        </div>
     </div>
-    <div class="followed-container" >
-            <div class="followed-title">
-                <h3>Abonnés</h3>
-            </div>
-                {% for user_follow in users_following %}
-            <div class="followed-user">
-                    <p>{{user_follow.followed_user}}</p>
-            </div>
-                {% endfor %}
+    {% endfor %}
+</div>
+<div class="followed-container">
+    <div class="followed-title">
+        <h3>Abonnés</h3>
     </div>
+    {% for user_follow in users_following %}
+    <div class="followed-user">
+        <p>{{user_follow.followed_user}}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

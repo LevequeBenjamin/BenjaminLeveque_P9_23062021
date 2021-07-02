@@ -438,3 +438,22 @@ footer {
 .follow-container .errorlist {
     color: red;
 }
+
+.delete-container form p {
+    font-size: 1.4rem;
+}
+
+.delete-container form input[type=submit] {
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    height: 40px;
+    width: 140px;
+    background-color: #85F8E2;
+}
+
+.delete-container form input[type=submit]:hover {
+    background-color: #ff7b77;
+}

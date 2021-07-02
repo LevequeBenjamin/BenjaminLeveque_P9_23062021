@@ -7,9 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 # forms
-from reviews.forms import CustomReviewForm, CustomTicketForm, FollowForm
+from reviews.forms import CustomReviewForm, CustomTicketForm, CustomFollowForm
 # models
-from accounts.models import CustomUser
 from reviews.models import Ticket, Review, UserFollows
 
 
@@ -96,8 +95,7 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """Overload the form_valid to add the user connected to the ticket."""
-        user = get_object_or_404(CustomUser, username=self.request.user)
-        form.instance.user = user
+        form.instance.user = self.request.user
         return super().form_valid(form)
 
 
@@ -140,15 +138,17 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         """Overload the form_valid method to create the ticket related to the review
         and add it to the review.
         """
+        # CustomTicketForm
         if self.request.method == "POST":
-            user = get_object_or_404(CustomUser, username=self.request.user)
             form_2 = CustomTicketForm(self.request.POST, self.request.FILES)
             if form_2.is_valid():
+                # Ticket
                 ticket = form_2.save(commit=False)
-                ticket.user = user
+                ticket.user = self.request.user
                 ticket.his_review = True
                 ticket.save()
-                form.instance.user = user
+                # Review
+                form.instance.user = self.request.user
                 form.instance.ticket = ticket
         return super().form_valid(form)
 
@@ -166,7 +166,6 @@ class ReviewResponseCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = CustomReviewForm
     template_name = "reviews/review_response_create.html"
-    success_url = reverse_lazy("flux:home")
 
     def get_context_data(self, **kwargs):
         """Overload the get_context_data method to pass the ticket in the context."""
@@ -179,11 +178,12 @@ class ReviewResponseCreateView(LoginRequiredMixin, CreateView):
         """Overload the form_valid method to update the ticket related to the review
         and add it to the review."""
         ticket = get_object_or_404(Ticket, pk=self.kwargs["pk"])
-        user = get_object_or_404(CustomUser, username=self.request.user)
+        # Ticket
         ticket.response = True
         ticket.save()
+        # Review
         form.instance.ticket = ticket
-        form.instance.user = user
+        form.instance.user = self.request.user
         return super().form_valid(form)
 
 
@@ -227,9 +227,8 @@ class FollowCreateView(LoginRequiredMixin, CreateView):
             and add it to the review.
     """
     model = UserFollows
-    form_class = FollowForm
+    form_class = CustomFollowForm
     template_name = "reviews/follow_create.html"
-    success_url = reverse_lazy("flux:create-follow")
 
     def get_form_kwargs(self):
         """Overload the get_form_kwargs method to pass the user connected in the form."""
@@ -248,8 +247,7 @@ class FollowCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """Overload the form_valid to add the user connected to the followed_user."""
-        user = get_object_or_404(CustomUser, username=self.request.user)
-        form.instance.followed_user = user
+        form.instance.followed_user = self.request.user
         return super().form_valid(form)
 
 

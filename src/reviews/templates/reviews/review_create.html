@@ -1,29 +1,29 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>LITReview | Créer une critique</title>
+<title>LITReview | Créer une critique</title>
 {% endblock %}
 
 {% block navigation %}
-    {% include "reviews/nav.html" %}
+{% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}
-    <div class="create-ticket-container">
-      <h2>Créer une critique</h2>
-      <form method="POST" enctype="multipart/form-data">
+<div class="create-ticket-container">
+    <h2>Créer une critique</h2>
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-          <div class="review-form">
-              <h3>Livre / Article</h3>
+        <div class="review-form">
+            <h3>Livre / Article</h3>
             {{ form.as_p }}
-          </div>
-          <div class="ticket-form">
-              <h3>Critique</h3>
+        </div>
+        <div class="ticket-form">
+            <h3>Critique</h3>
             {{ ticket_form.as_p }}
-          </div>
-          <div class="ticket_btn-container">
+        </div>
+        <div class="ticket_btn-container">
             <input class="envoyer-btn" type="submit" value="Envoyer">
-          </div>
-      </form>
-    </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

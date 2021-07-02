@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>LITReview | Modifier votre critique</title>
+<title>LITReview | Modifier votre critique</title>
 {% endblock %}
 
 {% block navigation %}
-    {% include "reviews/nav.html" %}
+{% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}
-    <div class="review-update-container">
-      <h2>Modifier votre critique</h2>
-          <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-              <div class="review-form">
-                {{ form.as_p }}
-              </div>
-              <div class="ticket_btn-container">
-                <input class="envoyer-btn" type="submit" value="Envoyer">
-              </div>
-          </form>
-        <div class="ticket-container">
-            <div class="ticket">
-                <p><span class="ticket-user">{{ ticket.user }} a demandé une critique</span>
-                    <span class="ticket-time">{{ ticket.time_created }}</span>
-                </p>
-                <p>{{ ticket.title }}</p>
-                <p>{{ ticket.description }}</p>
-                {% if ticket.image %}
-                <img src="{{ ticket.image.url }}" width="100px" height="100px" alt="img"/>
-                {% endif %}
-            </div>
+<div class="review-update-container">
+    <h2>Modifier votre critique</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="review-form">
+            {{ form.as_p }}
+        </div>
+        <div class="ticket_btn-container">
+            <input class="envoyer-btn" type="submit" value="Envoyer">
+        </div>
+    </form>
+    <div class="ticket-container">
+        <div class="ticket">
+            <p><span class="ticket-user">{{ ticket.user }} a demandé une critique</span>
+                <span class="ticket-time">{{ ticket.time_created }}</span>
+            </p>
+            <p>{{ ticket.title }}</p>
+            <p>{{ ticket.description }}</p>
+            {% if ticket.image %}
+            <img src="{{ ticket.image.url }}" width="100px" height="100px" alt="img"/>
+            {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}

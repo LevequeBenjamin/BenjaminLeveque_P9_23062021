@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block navigation %}
-    {% include "reviews/nav.html" %}
+{% include "reviews/nav.html" %}
 {% endblock %}
 
 {% block content %}
@@ -15,43 +15,43 @@
 </div>
 {% if flux_list %}
 {% for post in flux_list %}
-    {% if post.content_type == "TICKET" %}
-            <div class="ticket-container">
-                <div class="ticket">
-                    {% if post.user == request.user %}
-                    <p class="ticket-header"><span class="ticket-user"> Vous avez demandé une critique</span>
-                        <span class="ticket-time">{{ post.time_created }}</span>
-                    </p>
-                    {% else %}
-                    <p class="ticket-header"><span class="ticket-user">{{ post.user }} a demandé une critique</span>
-                        <span class="ticket-time">{{ post.time_created }}</span>
-                    </p>
-                    {% endif %}
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.description }}</p>
-                    {% if post.image %}
-                    <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
-                    {% endif %}
-                    {% if post.user == request.user or post.response %}
-                        {% if post.response == True %}
-                            <div class="ticket-response">
-                                <p>Le ticket a déjà recu une réponse.</p>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <div class="ticket_btn-container">
-                            <div class="ticket_btn-container-create">
-                                <a class="" href="{% url 'flux:create-response-review' post.id %}">Donner son avis</a>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
+{% if post.content_type == "TICKET" %}
+<div class="ticket-container">
+    <div class="ticket">
+        {% if post.user == request.user %}
+        <p class="ticket-header"><span class="ticket-user"> Vous avez demandé une critique</span>
+            <span class="ticket-time">{{ post.time_created }}</span>
+        </p>
+        {% else %}
+        <p class="ticket-header"><span class="ticket-user">{{ post.user }} a demandé une critique</span>
+            <span class="ticket-time">{{ post.time_created }}</span>
+        </p>
+        {% endif %}
+        <p>{{ post.title }}</p>
+        <p>{{ post.description }}</p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
+        {% endif %}
+        {% if post.user == request.user or post.response %}
+        {% if post.response == True %}
+        <div class="ticket-response">
+            <p>Le ticket a déjà recu une réponse.</p>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="ticket_btn-container">
+            <div class="ticket_btn-container-create">
+                <a class="" href="{% url 'flux:create-response-review' post.id %}">Donner son avis</a>
             </div>
-    {% elif post.content_type == "REVIEW"  or "FOLLOWER_REVIEW" %}
-        <div class="review-container">
-            <div class="review">
-                {% if post.user == request.user %}
-                    <p class="review-header"><span class="review-user">
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% elif post.content_type == "REVIEW"  or "FOLLOWER_REVIEW" %}
+<div class="review-container">
+    <div class="review">
+        {% if post.user == request.user %}
+        <p class="review-header"><span class="review-user">
                         Vous avez
                         {% if post.user != post.ticket.user %}
                         répondu à
@@ -59,71 +59,71 @@
                         posté
                         {% endif %}
                         une critique</span>
-                        <span class="review-time">{{ post.time_created }}</span>
-                    </p>
-                {% else %}
-                    <p class="review-header"><span class="review-user">{{ post.user }} a posté une critique</span>
-                        <span class="review-time">{{ post.time_created }}</span>
-                    </p>
-                {% endif %}
-                <h3>{{ post.headline }}  -
-                    {% if post.rating == 0 %}
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    {% endif %}
-                    {% if post.rating == 1 %}
-                    <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    {% endif %}
-                    {% if post.rating == 2 %}
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    {% endif %}
-                    {% if post.rating == 3 %}
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                    <span class="far fa-star"></span>
-                    {% endif %}
-                    {% if post.rating == 4 %}
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                    {% endif %}
-                    {% if post.rating == 5 %}
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span>
-                    {% endif %}
-                </h3>
-                <p>{{post.body}}</p>
-                <div class="review-ticket">
-                    <p>Ticket - {{post.ticket.user}}</p>
-                    <p>{{post.ticket.title}}</p>
-                    {% if post.ticket.image %}
-                        <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
-                    {% endif %}
-                </div>
-            </div>
+            <span class="review-time">{{ post.time_created }}</span>
+        </p>
+        {% else %}
+        <p class="review-header"><span class="review-user">{{ post.user }} a posté une critique</span>
+            <span class="review-time">{{ post.time_created }}</span>
+        </p>
+        {% endif %}
+        <h3>{{ post.headline }} -
+            {% if post.rating == 0 %}
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            {% endif %}
+            {% if post.rating == 1 %}
+            <span class="fas fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            {% endif %}
+            {% if post.rating == 2 %}
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            {% endif %}
+            {% if post.rating == 3 %}
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="far fa-star"></span>
+            <span class="far fa-star"></span>
+            {% endif %}
+            {% if post.rating == 4 %}
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="far fa-star"></span>
+            {% endif %}
+            {% if post.rating == 5 %}
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            <span class="fas fa-star"></span>
+            {% endif %}
+        </h3>
+        <p>{{ post.body }}</p>
+        <div class="review-ticket">
+            <p>Ticket - {{ post.ticket.user }}</p>
+            <p>{{ post.ticket.title }}</p>
+            {% if post.ticket.image %}
+            <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
+</div>
+{% endif %}
 {% endfor %}
 {% else %}
-    <h2>Le flux est vide</h2>
+<h2>Le flux est vide</h2>
 {% endif %}
 
 

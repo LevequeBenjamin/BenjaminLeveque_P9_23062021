@@ -2,20 +2,10 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-
-# settings.AUTH_USER_MODEL
 from django.urls import reverse
 
+# settings.AUTH_USER_MODEL
 CustomUserModel = get_user_model()
-
-RATING_OPTIONS = {
-    ("0", "0"),
-    ("1", "1"),
-    ("2", "2"),
-    ("3", "3"),
-    ("4", "4"),
-    ("5", "5")
-}
 
 
 class Ticket(models.Model):
@@ -58,7 +48,7 @@ class Review(models.Model):
 
     @staticmethod
     def get_absolute_url():
-        return reverse("flux:posts")
+        return reverse("flux:home")
 
 
 class UserFollows(models.Model):
@@ -74,3 +64,7 @@ class UserFollows(models.Model):
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user',)
         verbose_name = "UserFollow"
+
+    @staticmethod
+    def get_absolute_url():
+        return reverse("flux:create-follow")
