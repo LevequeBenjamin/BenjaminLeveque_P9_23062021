@@ -9,10 +9,16 @@
 {% endblock %}
 
 {% block content %}
-<h2>Modifier votre ticket</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Envoyer">
-</form>
+<div class="update-ticket-container">
+    <h2>Modifier votre ticket</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="ticket-form">
+            {{ form.as_p }}
+        </div>
+        <div class="ticket_btn-container">
+            <input class="envoyer-btn" type="submit" value="Envoyer">
+        </div>
+    </form>
+</div>
 {% endblock %}

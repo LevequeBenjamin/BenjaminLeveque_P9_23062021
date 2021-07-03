@@ -102,8 +102,8 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
 class TicketUpdateView(LoginRequiredMixin, UpdateView):
     """TicketUpdateView inherits from UpdateView for updating ticket."""
     model = Ticket
+    form_class = CustomTicketForm
     template_name = "reviews/ticket_update.html"
-    fields = ["title", "description", "image", ]
     success_url = reverse_lazy("flux:posts")
 
 
@@ -195,8 +195,8 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
             Overload the get_context_data method to pass the ticket in the context.
     """
     model = Review
+    form_class = CustomReviewForm
     template_name = "reviews/review_update.html"
-    fields = ["headline", "rating", "body", ]
     success_url = reverse_lazy("flux:posts")
 
     def get_context_data(self, **kwargs):

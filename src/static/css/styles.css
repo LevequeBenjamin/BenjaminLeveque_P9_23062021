@@ -32,7 +32,7 @@ section {
     min-height: 50vh;
 }
 
-h1 {
+h1 a {
     color: #CCB304;
     font-size: 2rem;
 }
@@ -52,6 +52,7 @@ h1 {
     height: 100px;
     z-index: 2;
     top: 0;
+    padding: 0 10px 0 10px;
 }
 
 nav {
@@ -78,6 +79,13 @@ nav {
 
 .navigation ul li :hover {
     background-color: #ff7b77;
+}
+
+@media screen and (max-width: 560px) {
+	nav {
+        flex-direction: column !important;
+        justify-content:space-around !important;
+    }
 }
 
 /* ********** footer ********** */
@@ -147,6 +155,17 @@ footer {
     padding: 20px;
     border-radius: 5px;
     position: relative;
+}
+
+@media screen and (max-width: 600px) {
+	.accounts-container {
+        flex-direction: column !important;
+        height: 500px !important;
+    }
+
+    .accounts-signup {
+        height: 120px !important;
+    }
 }
 
 .signup-container {
@@ -242,7 +261,7 @@ footer {
     display: block;
     color: red;
     position: absolute;
-    bottom: -120px;
+    bottom: -160px;
 }
 
 /* ********** reviews templates ********** */
@@ -265,6 +284,13 @@ footer {
 
 .btn-flux-container :hover {
     background-color: #ff7b77;
+}
+
+@media screen and (max-width: 410px) {
+	.btn-flux-container {
+        flex-direction: column !important;
+        height: 90px;
+    }
 }
 
 .ticket-container,
@@ -355,6 +381,9 @@ footer {
     width: 140px;
 }
 
+.review-response-container,
+.review-update-container,
+.update-ticket-container,
 .create-ticket-container,
 .create-review-container {
     background-color: #162E41;
@@ -365,6 +394,24 @@ footer {
     position: relative;
 }
 
+@media screen and (max-width: 410px) {
+	.review-response-container,
+    .review-update-container,
+    .update-ticket-container,
+    .create-ticket-container,
+    .create-review-container {
+        padding: 20px 0 20px 0 !important;
+    }
+
+    .ticket-form,
+    .review-form,
+    .follow-form {
+        margin: 10px 0 10px 0 !important;
+    }
+}
+
+.update-ticket-container form input[type=text],
+.review-update-container form input[type=text],
 .create-ticket-container form input[type=text],
 .create-review-container form input[type=text],
 .follow-container form input[type=text],
@@ -407,13 +454,6 @@ footer {
 
 .envoyer-btn:hover {
     background-color: #ff7b77;
-}
-
-.review-response-container,
-.review-update-container {
-    padding: 20px;
-    border: solid 1px #8599A5;
-    border-radius: 5px;
 }
 
 .follower-content,
