@@ -1,9 +1,22 @@
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
+
 # BenjaminLeveque_P9_23062021
 
 ## Développez une application Web en utilisant Django
 
 Le projet 9 de la formation Développeur d'application Python est le developpement d'une application
 web django permettant à une communauté d'utilisateurs de consulter ou de solliciter une critique de livres à la demande.
+
+## Technologies
+- Python
+- Django
+- HTML
+- CSS
+
+## Auteur
+Lévêque Benjamin
 
 ### Installation
 
