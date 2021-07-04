@@ -362,8 +362,13 @@ footer {
     justify-content: space-between;
 }
 
-.review h3 {
+.review h3,
+.ticket-description {
     margin: 20px 0 20px 0;
+}
+
+.ticket-title {
+    margin-top: 20px;
 }
 
 .review-ticket {

@@ -1,3 +1,5 @@
+"""Contains the forms of reviews app."""
+
 # django
 from django import forms
 from django.core.exceptions import ValidationError
@@ -22,6 +24,7 @@ class CustomTicketForm(forms.ModelForm):
     """CustomTicketForm inherits from ModelForm for creating ticket form."""
 
     class Meta:
+        """Meta options."""
         model = Ticket
         fields = ["title", "description", "image", ]
 
@@ -33,6 +36,7 @@ class CustomReviewForm(forms.ModelForm):
                                )
 
     class Meta:
+        """Meta options."""
         model = Review
         fields = ["headline", "rating", "body", ]
 
@@ -57,6 +61,7 @@ class CustomFollowForm(forms.ModelForm):
     )
 
     class Meta:
+        """Meta options."""
         model = UserFollows
         fields = ["user", ]
 

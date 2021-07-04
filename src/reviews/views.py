@@ -1,3 +1,5 @@
+"""Contains the views of reviews app."""
+
 # lib
 from itertools import chain
 # django
@@ -21,11 +23,10 @@ class FluxView(LoginRequiredMixin, ListView):
             related to the user connected in home page.
     """
     model = Ticket
-    context_object_name = "posts"
 
     def get_context_data(self, **kwargs):
-        """Overload the get_context_data method for display all tickets and reviews related to the user connected
-        in home page."""
+        """Overload the get_context_data method for display all tickets and reviews
+        related to the user connected in home page."""
         context = super(FluxView, self).get_context_data(**kwargs)
         users_followed = UserFollows.objects.filter(followed_user=self.request.user)
         all_reviews = Review.objects.all()
@@ -40,8 +41,9 @@ class FluxView(LoginRequiredMixin, ListView):
         follower_reviews = Review.objects.filter(pk__in=follower_reviews_id)
 
         # Get all the tickets from the user and the people they follow.
-        tickets = Ticket.objects.filter(
-            user__in=list(chain(list(user.user for user in users_followed), [self.request.user])), his_review=False)
+        tickets = self.model.objects.filter(
+            user__in=list(chain(list(user.user for user in users_followed),
+                                [self.request.user])), his_review=False)
 
         # Get all the reviews from the user and the people they follow.
         reviews = Review.objects.filter(
@@ -49,14 +51,15 @@ class FluxView(LoginRequiredMixin, ListView):
                                 [self.request.user]
                                 )))
 
-        follower_reviews_annotated = follower_reviews.annotate(content_type=Value('FOLLOWER_REVIEW', CharField()))
+        follower_reviews_annotated = follower_reviews.annotate(
+            content_type=Value('FOLLOWER_REVIEW', CharField()))
         tickets_annotated = tickets.annotate(content_type=Value('TICKET', CharField()))
         reviews_annotated = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
         # I delete if there are duplicates reviews
         set_reviews = set(list(chain(reviews_annotated, follower_reviews_annotated)))
 
-        context['flux_list'] = list(sorted(chain(tickets_annotated, set_reviews),
+        context['posts'] = list(sorted(chain(tickets_annotated, set_reviews),
                                            key=lambda post: post.time_created,
                                            reverse=True))
         context['request'] = self.request
@@ -72,18 +75,20 @@ class PostsView(LoginRequiredMixin, ListView):
              and reviews of to the user connected in posts page.
     """
     model = Ticket
-    context_object_name = "my_posts"
     template_name = "reviews/posts.html"
 
     def get_context_data(self, **kwargs):
-        """Overload the get_context_data method for display all tickets and reviews of to the user connected
-        in posts page."""
+        """Overload the get_context_data method for display all tickets and reviews
+        of to the user connected in posts page."""
         context = super(PostsView, self).get_context_data(**kwargs)
-        tickets = Ticket.objects.filter(user=self.request.user)
+        tickets = self.model.objects.filter(user=self.request.user)
         reviews = Review.objects.filter(user=self.request.user)
-        context['posts_list'] = list(sorted(chain(tickets, reviews),
+        tickets_annotated = tickets.annotate(content_type=Value('TICKET', CharField()))
+        reviews_annotated = reviews.annotate(content_type=Value('REVIEW', CharField()))
+        context['posts'] = list(sorted(chain(tickets_annotated, reviews_annotated),
                                             key=lambda post: post.time_created,
                                             reverse=True))
+
         return context
 
 
@@ -146,6 +151,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
                 ticket = form_2.save(commit=False)
                 ticket.user = self.request.user
                 ticket.his_review = True
+                ticket.response = True
                 ticket.save()
                 # Review
                 form.instance.user = self.request.user
@@ -239,8 +245,8 @@ class FollowCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         """Overload the get_context_data method to pass the follower et followed users."""
         context = super(FollowCreateView, self).get_context_data(**kwargs)
-        users_following = UserFollows.objects.filter(user=self.request.user)
-        users_follower = UserFollows.objects.filter(followed_user=self.request.user)
+        users_following = self.model.objects.filter(user=self.request.user)
+        users_follower = self.model.objects.filter(followed_user=self.request.user)
         context["users_following"] = users_following
         context["users_follower"] = users_follower
         return context

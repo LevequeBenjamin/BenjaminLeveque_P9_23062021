@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block content %}
-{% if posts_list %}
+{% if posts %}
 <h2>Vos posts</h2>
-{% for post in posts_list %}
-{% if post.title %}
+{% for post in posts %}
+{% if post.content_type == "TICKET" %}
 <div class="ticket-container">
     <div class="ticket">
         <p class="ticket-header"><span class="ticket-user">Vous avez demandé un critique</span>
             <span class="ticket-time">{{ post.time_created }}</span>
         </p>
-        <p>{{ post.title }}</p>
-        <p>{{ post.description }}</p>
+        <p class="ticket-title">{{ post.title }}</p>
+        <p class="ticket-description">{{ post.description }}</p>
         {% if post.image %}
         <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
         {% endif %}
@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-{% elif post.rating %}
+{% elif post.content_type == "REVIEW" %}
 <div class="review-container">
     <div class="review">
         <p><span class="review-user">Vous avez publié une critique</span>
@@ -89,7 +89,6 @@
                 <span class="review-ticket-time">{{ post.ticket.time_created }}</span>
             </p>
             <p>{{ post.ticket.title }}</p>
-            <p>{{ post.ticket.description }}</p>
             {% if post.ticket.image %}
             <img src="{{ post.ticket.image.url }}" width="100px" height="100px" alt="img"/>
             {% endif %}

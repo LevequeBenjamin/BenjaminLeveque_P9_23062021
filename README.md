@@ -41,3 +41,17 @@ $ python manage.py runserver
 ```
 
 Puis rendez-vous sur votre [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+### Compte administrateur : 
+
+Nom d'utilisateur:`LITReview` Mot de passe:`Test74940`
+
+### Comptes utilisateurs :
+
+Nom d'utilisateur:`Benjamin` Mot de passe:`Test74940`
+
+Nom d'utilisateur:`Tania` Mot de passe:`Test74940`
+
+Nom d'utilisateur:`Romain` Mot de passe:`Test74940`
+
+Nom d'utilisateur:`Ivan` Mot de passe:`Test74940`

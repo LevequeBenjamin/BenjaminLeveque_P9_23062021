@@ -13,8 +13,8 @@
     <a class="btn-ticket center" href="{% url 'flux:create-ticket' %}">Demander une critique</a>
     <a class="btn-review center" href="{% url 'flux:create-review' %}">Créer une critique</a>
 </div>
-{% if flux_list %}
-{% for post in flux_list %}
+{% if posts %}
+{% for post in posts %}
 {% if post.content_type == "TICKET" %}
 <div class="ticket-container">
     <div class="ticket">
@@ -27,8 +27,8 @@
             <span class="ticket-time">{{ post.time_created }}</span>
         </p>
         {% endif %}
-        <p>{{ post.title }}</p>
-        <p>{{ post.description }}</p>
+        <p class="ticket-title">{{ post.title }}</p>
+        <p class="ticket-description">{{ post.description }}</p>
         {% if post.image %}
         <img src="{{ post.image.url }}" width="100px" height="100px" alt="img"/>
         {% endif %}

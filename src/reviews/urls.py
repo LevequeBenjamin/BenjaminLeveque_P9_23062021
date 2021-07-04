@@ -1,6 +1,11 @@
+"""Contains the urls."""
+
+# django
 from django.urls import path
-from reviews.views import FluxView, TicketCreateView, TicketUpdateView, PostsView, TicketDeleteView, ReviewDeleteView, \
-    ReviewUpdateView, ReviewCreateView, ReviewResponseCreateView, FollowCreateView, FollowDeleteView
+# views
+from reviews.views import FluxView, TicketCreateView, TicketUpdateView, PostsView,\
+    TicketDeleteView, ReviewDeleteView, ReviewUpdateView, ReviewCreateView,\
+    ReviewResponseCreateView, FollowCreateView, FollowDeleteView
 
 app_name = "flux"
 
