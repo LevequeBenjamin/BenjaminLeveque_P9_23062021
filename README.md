@@ -48,7 +48,7 @@ Pour activer l'environnement, exécutez la commande :
 
 `$ env/Scripts/activate` sous windows.
 
-3.  Installez les dépendances du projet avec la commande:
+#### 3. Installez les dépendances du projet avec la commande:
 ```
 $ pip install -r requirements.txt
 ```
@@ -61,7 +61,9 @@ Pour lancer l'application utilisez la commande:
 $ python manage.py runserver
 ```
 
-Puis rendez-vous sur votre [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+#### Puis rendez-vous sur votre [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+#### Vous pouvez créer un nouvel utilisateur ou utiliser un compte existant.
 
 ### Compte administrateur : 
 
