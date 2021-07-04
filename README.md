@@ -22,14 +22,19 @@ Lévêque Benjamin
 
 Cet application web exécutable localement peut être installée en suivant les étapes décrites ci-dessous.
 
-1. Clonez le [repository](https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git) à l'aide de la commande suivante :
+#### 1. Clonez le [repository](https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git) à l'aide de la commande suivante :
 
-`$ git clone "https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git"` 
+```
+$ git clone "https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git"
+``` 
 (vous pouvez également télécharger le code en temps [qu'archive zip](https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021/archive/refs/heads/master.zip))
 
-2. Exécutez l'application dans un environnement virtuel
+#### 2. Exécutez l'application dans un environnement virtuel
 
-Rendez-vous depuis un terminal à la racine du répertoire BenjaminLeveque_P9_23062021/src avec la commande `$ cd BenjaminLeveque_P9_23062021/src`
+Rendez-vous depuis un terminal à la racine du répertoire BenjaminLeveque_P9_23062021/src avec la commande :
+```
+$ cd BenjaminLeveque_P9_23062021/src
+```
 
 Pour créez un environnement, utilisez la commande :
 
@@ -43,7 +48,10 @@ Pour activer l'environnement, exécutez la commande :
 
 `$ env/Scripts/activate` sous windows.
 
-3.  Installez les dépendances du projet avec la commande `$ pip install -r requirements.txt`
+3.  Installez les dépendances du projet avec la commande:
+```
+$ pip install -r requirements.txt
+```
 
 ### Usage
 
