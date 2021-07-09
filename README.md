@@ -29,7 +29,7 @@ $ git clone "https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git"
 ``` 
 (vous pouvez également télécharger le code en temps [qu'archive zip](https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021/archive/refs/heads/master.zip))
 
-#### 2. Créez un fichier `.env` à l'intérieur du dossier `LITRVeview` et créez vos variables d'environnement.
+#### 2. Créez un fichier `.env` à la racine du dossier `LITRVeview` et créez vos variables d'environnement.
 
 ```
 SECRET_KEY = 'django-insecure-ubq*h$699uyj-)0svi1i&o-7bwdk8kh&g&u@(w^p8%9c4o%xqv'
