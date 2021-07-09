@@ -56,7 +56,7 @@ Pour activer l'environnement, exécutez la commande :
 
 `$ env/Scripts/activate` sous windows.
 
-#### 3. Installez les dépendances du projet avec la commande:
+#### 4. Installez les dépendances du projet avec la commande:
 ```
 $ pip install -r requirements.txt
 ```
