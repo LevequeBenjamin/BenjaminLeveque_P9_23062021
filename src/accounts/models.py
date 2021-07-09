@@ -5,4 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
+    """
+    This is a class allowing to create a User.
+    """
     pass
