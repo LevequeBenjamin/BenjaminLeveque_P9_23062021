@@ -29,15 +29,7 @@ $ git clone "https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021.git"
 ``` 
 (vous pouvez également télécharger le code en temps [qu'archive zip](https://github.com/LevequeBenjamin/BenjaminLeveque_P9_23062021/archive/refs/heads/master.zip))
 
-#### 2. Créez un fichier `.env` à la racine du dossier `LITRVeview` et créez vos variables d'environnement.
-
-```
-SECRET_KEY = 'django-insecure-ubq*h$699uyj-)0svi1i&o-7bwdk8kh&g&u@(w^p8%9c4o%xqv'
-DEBUG=True
-ALLOWED_HOSTS='127.0.0.1'
-```
-
-#### 3. Exécutez l'application dans un environnement virtuel
+#### 2. Exécutez l'application dans un environnement virtuel
 
 Rendez-vous depuis un terminal à la racine du répertoire BenjaminLeveque_P9_23062021/src avec la commande :
 ```
@@ -56,9 +48,17 @@ Pour activer l'environnement, exécutez la commande :
 
 `$ env/Scripts/activate` sous windows.
 
-#### 4. Installez les dépendances du projet avec la commande:
+#### 3. Installez les dépendances du projet avec la commande:
 ```
 $ pip install -r requirements.txt
+```
+
+#### 4. Créez un fichier `.env` à la racine du répertoire `LITRVeview` et créez vos variables d'environnement.
+
+```
+SECRET_KEY = 'django-insecure-ubq*h$699uyj-)0svi1i&o-7bwdk8kh&g&u@(w^p8%9c4o%xqv'
+DEBUG=True
+ALLOWED_HOSTS='127.0.0.1'
 ```
 
 ### Usage
