@@ -1,4 +1,4 @@
-"""Contains the urls."""
+"""Contains the urls of reviews app."""
 
 # django
 from django.urls import path

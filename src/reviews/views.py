@@ -5,6 +5,7 @@ from itertools import chain
 # django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Value, CharField
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -60,8 +61,8 @@ class FluxView(LoginRequiredMixin, ListView):
         set_reviews = set(list(chain(reviews_annotated, follower_reviews_annotated)))
 
         context['posts'] = list(sorted(chain(tickets_annotated, set_reviews),
-                                           key=lambda post: post.time_created,
-                                           reverse=True))
+                                       key=lambda post: post.time_created,
+                                       reverse=True))
         context['request'] = self.request
         return context
 
@@ -86,8 +87,8 @@ class PostsView(LoginRequiredMixin, ListView):
         tickets_annotated = tickets.annotate(content_type=Value('TICKET', CharField()))
         reviews_annotated = reviews.annotate(content_type=Value('REVIEW', CharField()))
         context['posts'] = list(sorted(chain(tickets_annotated, reviews_annotated),
-                                            key=lambda post: post.time_created,
-                                            reverse=True))
+                                       key=lambda post: post.time_created,
+                                       reverse=True))
 
         return context
 
@@ -218,6 +219,20 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Review
     context_object_name = "post"
     success_url = reverse_lazy("flux:posts")
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        ticket = get_object_or_404(Ticket, pk=self.object.ticket.id)
+        ticket.response = False
+        ticket.his_review = False
+        ticket.save()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
 
 
 class FollowCreateView(LoginRequiredMixin, CreateView):

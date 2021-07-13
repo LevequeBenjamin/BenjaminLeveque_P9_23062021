@@ -1,7 +1,13 @@
+"""Contains the urls."""
+
+# django
 from django.contrib import admin
 from django.urls import path, include
-from LITReview import settings
 from django.conf.urls.static import static
+
+# settings
+from LITReview import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
